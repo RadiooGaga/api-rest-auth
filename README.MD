@@ -15,3 +15,6 @@ Las contraseñas están encriptadas.
 
 ![captura a Insomnia](/src/pics/1.png)
 ![captura a Insomnia](/src/pics/2.png)
+
+Prueba en el front
+![captura a Insomnia](/src/pics/3.png)
