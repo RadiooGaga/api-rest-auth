@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const { connectDB } = require('./src/config/db');
 
-const adminRoutes = require("./src/api/routes/admin");
+
 const usersRoutes = require("./src/api/routes/user");
 const gamesRoutes = require("./src/api/routes/videogame");
 const consolesRoutes = require("./src/api/routes/console");
@@ -18,7 +18,7 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/v1/admin', adminRoutes);
+
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/games', gamesRoutes);
 app.use('/api/v1/consoles', consolesRoutes);

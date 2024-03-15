@@ -62,34 +62,6 @@ const login = async (req, res, next) => {
     }
 }
 
-const updateUser = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true }).lean();
-        console.log('El usuario ha sido actualizado', updatedUser);
-        return res.status(200).json(updatedUser); 
-        
-        } catch (error){
-            return res.status(400).json('Error al actualizar el juego', error) 
-        }
-}
-
-//delete (sólo administradores)
-const deleteUser = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const userDeleted = await User.findByIdAndDelete(id);
-        return res.status(200).json({
-        message: "Usuario eliminado",
-        userDeleted
-        });
-        
-    } catch (error) {
-        return res.status(400).json(error);
-    }
-};
-
-
 const getUsers = async (req,res,next) => {
     try {
         const users = await User.find();
@@ -111,4 +83,34 @@ const getUserById = async (req,res,next) => {
     }
 }
 
-module.exports = { register, login, deleteUser, updateUser, getUsers, getUserById };
+const updateUserById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true }).lean();
+        console.log('El usuario ha sido actualizado', updatedUser);
+        return res.status(200).json(updatedUser); 
+        
+        } catch (error){
+            return res.status(400).json('Error al actualizar el juego', error) 
+        }
+}
+
+//delete (sólo administradores)
+const deleteUserById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const userDeleted = await User.findByIdAndDelete(id);
+        return res.status(200).json({
+        message: "Usuario eliminado",
+        userDeleted
+        });
+        
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+};
+
+
+
+
+module.exports = { register, login, getUsers, getUserById, updateUserById, deleteUserById };
