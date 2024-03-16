@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Game = require('../models/Videogame');
+const Console = require('../models/Console');
 
 //crear juego
 const createGame = async (req, res, next) => {
@@ -12,7 +13,8 @@ const createGame = async (req, res, next) => {
                 price: req.body.price,
                 featuredConsoles: req.body.featuredConsoles,
                 
-            });
+            })
+
             const gameSaved = await newGame.save();
             console.log("videojuego guardado!")
             return res.status(201).json(gameSaved);
@@ -37,10 +39,19 @@ const getGames = async (req, res, next) => {
 const getGameById = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const getGameById = await Game.findById(id);
+        const getGameById = await Game.findById(id).populate({
+            path: 'featuredConsoles',
+            model: Console,
+            select: {
+                _id: true,
+                name: true,
+            },
+        }).lean();
+        console.log(getGameById);
         return res.status(200).json(getGameById);
         
     } catch (error) {
+        console.log(error)
         return res.status(400).json(error)
     }
 }

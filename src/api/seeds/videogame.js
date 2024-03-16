@@ -1,13 +1,8 @@
 /*
-
 const mongoose = require('mongoose');
 
 //importamos el modelo Game en este nuevo archivo
 const Game = require('../models/Videogame');
-
-
-const gameDocuments = Game.map(game => new Game(game));
-
 
 // Conexión de nuevo a la DB e inserto de los documentos
 mongoose.connect(process.env.DB_URL, {})

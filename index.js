@@ -4,15 +4,19 @@ const cors = require('cors');
 const { connectDB } = require('./src/config/db');
 
 
+
 const usersRoutes = require("./src/api/routes/user");
 const gamesRoutes = require("./src/api/routes/videogame");
 const consolesRoutes = require("./src/api/routes/console");
+
 
 
 const app = express();
 
 
 connectDB();
+
+
 
 //! configurando mi servidor para que sea capaz de interpretar formatos json que le  envío.
 app.use(express.json());

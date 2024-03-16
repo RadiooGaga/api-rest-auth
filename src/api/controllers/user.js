@@ -12,16 +12,21 @@ const register = async (req, res, next) => {
             password: req.body.password,
             email: req.body.email,
             birthday: req.body.birthday,
-            rol: req.body.rol,
-            profileImg: req.body.profileImg
+            rol: "user",
+            profileImg: req.body.profileImg,
+            videogames: req.body.videogames,
+            consoles: req.body.consoles,
             
         });
 
         //recogemos usuario y await hasta que encuentre uno 
-        const userDuplicated = await User.findOne({ userName: req.body.userName});
+        const userExists = await User.findOne({ userName: req.body.userName });
+            console.log(userExists)
+        
+        
 
         //si el nombre de usuario no existiera...
-        if (userDuplicated) {
+        if (userExists) {
             return res.status(400).json("Ese nombre de usuario ya existe");
         }
 

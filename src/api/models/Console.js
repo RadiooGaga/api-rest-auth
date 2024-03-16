@@ -11,7 +11,7 @@
       release: { type: Number, trim: true, required: true },
       manufacturer: { type: String, trim: true, required: true },
       price: { type: Number, trim: true, required: true },
-      featuredGames: { type: String, trim: true, required: true }
+      featuredGames: { type: [String], trim: true, required: true }
   
       }, 
       {

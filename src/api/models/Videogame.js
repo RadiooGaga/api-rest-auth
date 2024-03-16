@@ -9,8 +9,9 @@ const gameSchema = new mongoose.Schema(
     name:  { type: String, trim: true, required: true, unique: true },
     year: { type: Number, trim: true, required: true },
     type: { type: String, trim: true, required: true },
+    image: { type: String, trim: true, required: true },
     price: { type: Number, trim: true, required: true },
-    featuredConsoles: { type: String, trim: true, required: true }
+    featuredConsoles: { type: [String], trim: true, required: true  }
 
     }, 
     {

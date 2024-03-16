@@ -23,4 +23,5 @@ userSchema.pre('save', function() {
 })
 
 const User = mongoose.model("users-videogames", userSchema, "videogame-users");
+
 module.exports = User;
