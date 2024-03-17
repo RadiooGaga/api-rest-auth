@@ -23,7 +23,8 @@ const isUser = async (req, res, next) => {
     }
 }
 
-//sólo el administrador con el rol "admin" (MariaAdmin).
+
+//sólo el administrador con el rol "admin".
 const isAdmin = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
@@ -49,4 +50,7 @@ const isAdmin = async (req, res, next) => {
     }
 }
 
-module.exports = { isUser, isAdmin } 
+
+
+
+module.exports = {  isUser, isAdmin } 

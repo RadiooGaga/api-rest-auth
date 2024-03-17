@@ -1,9 +1,10 @@
-const { generateSign } = require('../../utils/jwt');
+const { generateToken } = require('../../utils/jwt');
 const User = require('../models/User')
 const bcrypt = require("bcrypt");
+const { deleteImgCloudinary } = require('../../middlewares/files');
 
 
-//registro del usuario (postUser)
+//registro del usuario (post)
 const register = async (req, res, next) => {
     try {
         const newUser = new User(
@@ -13,9 +14,13 @@ const register = async (req, res, next) => {
             email: req.body.email,
             birthday: req.body.birthday,
             rol: "user",
+<<<<<<< HEAD
             profileImg: req.body.profileImg,
             videogames: req.body.videogames,
             consoles: req.body.consoles,
+=======
+            img: req.body.img
+>>>>>>> 9ca499a (first commit)
             
         });
 
@@ -51,7 +56,7 @@ const login = async (req, res, next) => {
         if (user) {
            if (bcrypt.compareSync(req.body.password, user.password)) {
             //lo que pasa cuando te logueas con jsonwebtoken
-            const token = generateSign(user._id);
+            const token = generateToken(user._id);
             return res.status(200).json({ user, token });
             
             } else {
@@ -67,6 +72,10 @@ const login = async (req, res, next) => {
     }
 }
 
+<<<<<<< HEAD
+=======
+//todos los usuarios (solo admin)
+>>>>>>> 9ca499a (first commit)
 const getUsers = async (req,res,next) => {
     try {
         const users = await User.find();
@@ -88,6 +97,11 @@ const getUserById = async (req,res,next) => {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+//update usuarios (sólo admin)
+>>>>>>> 9ca499a (first commit)
 const updateUserById = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -96,6 +110,7 @@ const updateUserById = async (req, res, next) => {
         return res.status(200).json(updatedUser); 
         
         } catch (error){
+<<<<<<< HEAD
             return res.status(400).json('Error al actualizar el juego', error) 
         }
 }
@@ -117,5 +132,32 @@ const deleteUserById = async (req, res, next) => {
 
 
 
+=======
+            return res.status(400).json('Error al actualizar el usuario', error) 
+        }
+}
+
+
+
+//delete usuarios (sólo admin)
+const deleteUserById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const userDeleted = await User.findByIdAndDelete(id, 
+        {...req.body, img: req.file ? req.file.path : 'not image'},
+        { new: true }).lean();
+        if (userDeleted.img) {
+          deleteImgCloudinary(userDeleted.img);
+        }
+        return res.status(200).json({ 
+        message: '¡Usuario borrado!',
+        userDeleted
+     });
+       
+    } catch (error) {
+        return res.status(400).json('Error al eliminar el usuario', error);
+    }
+  };
+>>>>>>> 9ca499a (first commit)
 
 module.exports = { register, login, getUsers, getUserById, updateUserById, deleteUserById };
