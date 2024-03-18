@@ -70,8 +70,8 @@ Todos los usuarios pueden
 
 ## Las contraseñas están encriptadas
 
-![captura a Insomnia](/src/pics/1.png)
-![captura a Insomnia](/src/pics/2.png)
+![captura a Insomnia](/src/pics/picture1.png)
+![captura a Insomnia](/src/pics/picture2.png)
 
 Pruebas en el front
-![captura a Insomnia](/src/pics/3.png)
+![captura a Insomnia](/src/pics/picture3.png)

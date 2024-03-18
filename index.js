@@ -2,12 +2,9 @@ require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 const { connectDB } = require('./src/config/db');
+const cloudinary = require('cloudinary').v2;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 9ca499a (first commit)
 const usersRoutes = require("./src/api/routes/user");
 const gamesRoutes = require("./src/api/routes/videogame");
 const consolesRoutes = require("./src/api/routes/console");
@@ -15,6 +12,13 @@ const consolesRoutes = require("./src/api/routes/console");
 
 
 const app = express();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    cloudinary_url: process.env.CLOUDINARY_URL
+})
 
 
 connectDB();
@@ -26,10 +30,6 @@ app.use(express.json());
 app.use(cors());
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9ca499a (first commit)
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/games', gamesRoutes);
 app.use('/api/v1/consoles', consolesRoutes);

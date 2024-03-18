@@ -1,37 +1,14 @@
-const mongoose = require('mongoose');
 const Console = require('../models/Console');
 const Game = require('../models/Videogame');
-<<<<<<< HEAD
-=======
-const { deleteImgCloudinary } = require('../../middlewares/files');
->>>>>>> 9ca499a (first commit)
+const { deleteImgCloudinary } = require('../../utils/deleteFiles');
 
 //crear consola (solo admin)
 const createConsole = async (req, res, next) => {
     try {
-<<<<<<< HEAD
-        const newConsole = new Console(
-            {
-                name:  req.body.name,
-                release: req.body.release,
-                manufacturer: req.body.manufacturer,
-                price: req.body.price,
-                featuredGames: req.body.featuredGames
-                
-            })
-            const consoleSaved = await newConsole.save();
-            console.log("consola guardada!")
-            return res.status(201).json(consoleSaved);
-        
-    } catch (error) {
-        console.log("error al crear consola")
-        return res.status(400).json(error)
-    }
-=======
         // Crearemos una instancia de la consola con los datos enviados
     const newConsole = new Console({
         name:  req.body.name,
-        release: req.body.release,
+        released: req.body.released,
         cover: req.body.cover,
         manufacturer: req.body.manufacturer,
         description: req.body.description,
@@ -39,7 +16,7 @@ const createConsole = async (req, res, next) => {
         featuredGames: req.body.featuredGames
     })
     if (req.file) {
-        //en el caso de que venga su ruta se añadirá al campo "cover" de nuestro nuevo juego
+        //en el caso de que venga su ruta se añadirá al campo "cover" de nuestra nueva consola
         newConsole.cover = req.file.path;
       }
 
@@ -50,8 +27,7 @@ const createConsole = async (req, res, next) => {
   } catch (error) {
       console.log("error al crear la consola")
       return res.status(400).json(error)
-  }
->>>>>>> 9ca499a (first commit)
+  } 
 }
 
 
@@ -88,15 +64,21 @@ const getConsoleById = async (req, res, next) => {
 }
 
 
-//actualizar consola (solo admin)
+//PATCH actualizar consola (solo admin)
 const updateConsoleById = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const updatedConsole = await Console.findByIdAndUpdate(id, 
-            {...req.body, cover: req.file ? req.file.path : 'not image'},
-            { new: true }).lean();
-        console.log('La consola se ha actualizado', updatedConsole);
-        return res.status(200).json({game: updatedConsole, message: 'Consola actualizada!'})
+        const { id } = req.params 
+        const newConsole = new Console(req.body);
+        newConsole._id = id;
+
+        if (req.file){
+            newConsole.cover = req.file.path;
+            const oldConsole = await Console.findByIdAndUpdate(id);
+            deleteImgCloudinary(oldConsole.cover);
+        }
+
+        const updatedConsole = await Console.findByIdAndUpdate(id, newConsole, {new: true});
+        return res.status(200).json({console: updatedConsole, message: 'Consola actualizada!'});
         
         } catch (error){
             return res.status(400).json('Error al actualizar la consola', error) 
