@@ -70,6 +70,10 @@ Todos los usuarios pueden
 
 ## Las contraseñas están encriptadas
 
+##Se pueden subir imágenes al crear los juegos mediante Multipart form en Insomnia, hacer actualizaciones de las imágenes 
+de forma que se sobreescriban y borren la imagen anterior en Cloudinary, de la misma forma que al borrar cualquier juego, 
+se borrará también en Cloudinary.
+
 ![captura a Insomnia](/src/pics/picture1.png)
 ![captura a Insomnia](/src/pics/picture2.png)
 
