@@ -9,7 +9,7 @@ El rol de administrador (admin) permitirá hacer determinadas acciones en la API
 ## traerse todos los usuarios
 
 - **Método:** GET
-- **URL:** `http://localhost:3000/api/v1/users/`
+- **URL:** `http://localhost:3003/api/v1/users/`
 
 ## traerse un usuario por su id
 
